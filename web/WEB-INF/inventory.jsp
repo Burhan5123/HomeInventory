@@ -71,7 +71,7 @@
                     <input type="text" name="itemEdit" value="${editItem.itemName}" placeholder="Item Name">
                     <br>
                     <label>Price: </label>
-                    <input type="text" name="priceEdit" value="${editItem.price}" placeholder="Price">
+                    <input type="text" name="priceEdit" value="${editItem.price}" min="0" placeholder="Price">
                     <br>
                     <input type="submit" value="Save">
                     <input type="hidden" name="action" value="save">
@@ -101,7 +101,7 @@
                     <input type="text" name="itemAdd" value="" placeholder="Item Name" required>
                     <br>
                     <label>Price: </label>
-                    <input type="number" name="priceAdd" value="" placeholder="Price" step=".01" required>
+                    <input type="number" name="priceAdd" value="" placeholder="Price" min="0" step=".01" required>
                     <br>
                     <input type="submit" value="Add">
                     <input type="hidden" name="action" value="add">
