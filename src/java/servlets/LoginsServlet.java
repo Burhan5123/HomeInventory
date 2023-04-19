@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package servlets;
 
 import java.io.IOException;
@@ -12,16 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.AccountService;
+import models.Role;
 import models.User;
+import services.AccountService;
 
-/**
- *
- * @author burha
- */
-public class loginServlet extends HttpServlet {
+public class LoginsServlet extends HttpServlet {
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -32,9 +24,6 @@ public class loginServlet extends HttpServlet {
             session.invalidate();
         } else if (param != null && param.contains("register")) {
             response.sendRedirect("register");
-            return;
-        } else if (param != null && param.contains("forgot")) {
-            response.sendRedirect("reset");
             return;
         } else {
             getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
@@ -53,7 +42,7 @@ public class loginServlet extends HttpServlet {
         String path = getServletContext().getRealPath("/WEB-INF");
         
         AccountService as = new AccountService();
-        Users user = as.login(email, password, path);
+        User user = as.login(email, password, path);
 
         if (user == null || !user.getActive()) {
             request.setAttribute("message", "Login failed. Please try again.");
