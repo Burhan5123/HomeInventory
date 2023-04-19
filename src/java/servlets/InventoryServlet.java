@@ -21,6 +21,9 @@ import models.User;
 import services.AccountService;
 import services.InventoryService;
 
+/*
+@author Burhan
+*/
 public class InventoryServlet extends HttpServlet {
 
     @Override
