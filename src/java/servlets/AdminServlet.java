@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.Categories;
-import models.Items;
+import models.Category;
+import models.Item;
 import models.Role;
-import models.Users;
+import models.User;
 import services.AccountService;
 import services.InventoryService;
 
@@ -33,7 +33,7 @@ public class AdminServlet extends HttpServlet {
        
         try {
             if (param != null && param.contains("category")) {
-                List<Categories> categories = is.getAllCats();
+                List<Category> categories = is.getAllCats();
                 session.setAttribute("categories", categories);
                 getServletContext().getRequestDispatcher("/WEB-INF/categories.jsp").forward(request,response);
                 return;
@@ -43,11 +43,11 @@ public class AdminServlet extends HttpServlet {
                 int categoryID = Integer.parseInt(request.getParameter("catID"));
                 session.setAttribute("catID", categoryID);
                 
-                Categories category = cdb.get(categoryID);
+                Category category = cdb.get(categoryID);
                 
                 request.setAttribute("editCat", category);
                 
-                List<Categories> categories = is.getAllCats();
+                List<Category> categories = is.getAllCats();
                 session.setAttribute("categories", categories);
                 
                 getServletContext().getRequestDispatcher("/WEB-INF/categories.jsp").forward(request,response);
@@ -57,13 +57,13 @@ public class AdminServlet extends HttpServlet {
                 
                 is.insertCat(categoryName);
                 
-                List<Categories> categories = is.getAllCats();
+                List<Category> categories = is.getAllCats();
                 session.setAttribute("categories", categories);
                 
                 getServletContext().getRequestDispatcher("/WEB-INF/categories.jsp").forward(request,response);
                 return;
             }
-            List<Users> usersList = as.getAll();
+            List<User> usersList = as.getAll();
             session.setAttribute("users", usersList);
             List<Role> roles = rdb.getAll();
             session.setAttribute("roles", roles);
@@ -71,7 +71,7 @@ public class AdminServlet extends HttpServlet {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/administration.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request,response);
         return;
     }
 
@@ -118,7 +118,7 @@ public class AdminServlet extends HttpServlet {
                         break;
                     case "edit":
                         username = request.getParameter("usernameEdit");
-                        Users editUser = as.get(username);
+                        User editUser = as.get(username);
                         request.setAttribute("editUser", editUser);
                         break;
                     case "save":
@@ -142,7 +142,7 @@ public class AdminServlet extends HttpServlet {
 
                         is.updateCat(categoryName, categoryID);
 
-                        List<Categories> categories = is.getAllCats();
+                        List<Category> categories = is.getAllCats();
                         session.setAttribute("categories", categories);
 
                         getServletContext().getRequestDispatcher("/WEB-INF/categories.jsp").forward(request,response);
@@ -151,11 +151,11 @@ public class AdminServlet extends HttpServlet {
                         break;
                 } 
             }
-            List<Users> usersList = as.getAll();
+            List<User> usersList = as.getAll();
             session.setAttribute("users", usersList);
             List<Role> roles = rdb.getAll();
             session.setAttribute("roles", roles);
-            List<Categories> categories = is.getAllCats();
+            List<Category> categories = is.getAllCats();
             session.setAttribute("categories", categories);
             
         } catch (Exception ex) {
@@ -163,7 +163,7 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("message", "An error has occurred.");
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/administration.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request,response);
         return;
     }
 }

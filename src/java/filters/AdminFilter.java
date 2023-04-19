@@ -17,17 +17,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Role;
-import models.Users;
+import models.User;
 
 
 /**
  *
- * @author Burha
+ * @author Burhan
  */
 public class AdminFilter implements Filter {
     
     private static final boolean debug = true;
 
+    // The filter configuration object we are associated with.  If
+    // this value is null, this filter instance is not currently
+    // configured. 
     private FilterConfig filterConfig = null;
     
     public AdminFilter() {
@@ -46,7 +49,7 @@ public class AdminFilter implements Filter {
         
         try {
             UserDB udb = new UserDB();
-            Users user = udb.get(email);
+            User user = udb.get(email);
             Role role = user.getRole();
             roleID = role.getRoleId();
         } catch (Exception ex) {

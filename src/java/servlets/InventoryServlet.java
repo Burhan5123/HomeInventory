@@ -14,10 +14,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import models.Categories;
-import models.Items;
+import models.Category;
+import models.Item;
 import models.Role;
-import models.Users;
+import models.User;
 import services.AccountService;
 import services.InventoryService;
 
@@ -32,20 +32,19 @@ public class InventoryServlet extends HttpServlet {
         String email = (String) session.getAttribute("email");
         InventoryService is = new InventoryService();
         String param = request.getQueryString();
-        Users currentUser = (Users) session.getAttribute("loggedIn");
+        User currentUser = (User) session.getAttribute("loggedIn");
         System.out.println(currentUser);
         
-        
         try {
-            Users user = as.get(email);
+            User user = as.get(email);
             if (user.getRole().getRoleId() == 1) {
-                List<Items> itemsList = is.getAll();
+                List<Item> itemsList = is.getAll();
                 session.setAttribute("items", itemsList);
                 request.setAttribute("user", user);
                 
                 if (param != null && param.equals("editProfile")) {
                     request.setAttribute("editProfile", user);
-                    getServletContext().getRequestDispatcher("/WEB-INF/profileedit.jsp").forward(request,response);
+                    getServletContext().getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request,response);
                     return;
                 }
                 
@@ -55,26 +54,26 @@ public class InventoryServlet extends HttpServlet {
             
             session.setAttribute("loggedIn", user);
             request.setAttribute("user", user);
-            List<Items> itemsList = is.getAll(email);
+            List<Item> itemsList = user.getItemList();
             session.setAttribute("items", itemsList);
         } catch (Exception ex) {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (param != null && param.equals("editProfile")) {
-            currentUser = (Users) session.getAttribute("loggedIn");
+            currentUser = (User) session.getAttribute("loggedIn");
             request.setAttribute("editProfile", currentUser);
-            getServletContext().getRequestDispatcher("/WEB-INF/profileedit.jsp").forward(request,response);
+            getServletContext().getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request,response);
             return;
         }
         
         try {
-            
-            List<Items> itemsList = is.getAll(email);
+            User user = as.get(email);
+            List<Item> itemsList = user.getItemList();
             session.setAttribute("items", itemsList);
             
             CategoriesDB cdb = new CategoriesDB();
-            List<Categories> categoryList = cdb.getAll();
+            List<Category> categoryList = cdb.getAll();
             session.setAttribute("categories", categoryList);
             
         } catch (Exception ex) {
@@ -94,16 +93,16 @@ public class InventoryServlet extends HttpServlet {
         
         String email = (String) session.getAttribute("email");
         String action = request.getParameter("action");
-        Users user = null;
+        User user = null;
         
         try {
             user = as.get(email);
             if (user.getRole().getRoleId() == 1) {
-                List<Items> itemsList = is.getAll();
+                List<Item> itemsList = is.getAll();
                 session.setAttribute("items", itemsList);
                 
                 CategoriesDB cdb = new CategoriesDB();
-                List<Categories> categoryList = cdb.getAll();
+                List<Category> categoryList = cdb.getAll();
                 session.setAttribute("categories", categoryList); 
             }
         } catch (Exception ex) {
@@ -135,7 +134,7 @@ public class InventoryServlet extends HttpServlet {
                 case "edit":
                     itemid = Integer.parseInt(request.getParameter("itemID"));
                     session.setAttribute("itemid", itemid);
-                    Items editItem = is.get(itemid);
+                    Item editItem = is.get(itemid);
                     request.setAttribute("editItem", editItem);
                     break;
                 case "save":
@@ -143,8 +142,8 @@ public class InventoryServlet extends HttpServlet {
                     String name = request.getParameter("itemEdit");
                     double price = Double.parseDouble(request.getParameter("priceEdit"));
                     itemid = (Integer)session.getAttribute("itemid");
-                    Items item = is.get(itemid);
-                    Users itemUser = item.getOwner();
+                    Item item = is.get(itemid);
+                    User itemUser = item.getOwner();
                     String owner = itemUser.getEmail();
                     
                     is.update(itemid, cat, name, price, owner);
@@ -183,11 +182,11 @@ public class InventoryServlet extends HttpServlet {
         
         try {
             if (user.getRole().getRoleId() == 1) {
-                List<Items> itemsList = is.getAll();
+                List<Item> itemsList = is.getAll();
                 session.setAttribute("items", itemsList);
                 
                 CategoriesDB cdb = new CategoriesDB();
-                List<Categories> categoryList = cdb.getAll();
+                List<Category> categoryList = cdb.getAll();
                 session.setAttribute("categories", categoryList);                
             }
         } catch (Exception exception) {

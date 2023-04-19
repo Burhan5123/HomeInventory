@@ -1,59 +1,58 @@
-
 package services;
 
 import dataaccess.CategoriesDB;
 import dataaccess.ItemsDB;
 import dataaccess.UserDB;
 import java.util.List;
-import models.Categories;
-import models.Items;
-import models.Users;
+import models.Category;
+import models.Item;
+import models.User;
 
 public class InventoryService {
-    public Items get(int itemID) throws Exception {
+    public Item get(int itemID) throws Exception {
         ItemsDB itemsdb = new ItemsDB();
-        Items items = itemsdb.get(itemID);
+        Item items = itemsdb.get(itemID);
         return items;
     }
     
-    public List<Items> getAll(String email) throws Exception {
+    public List<Item> getAll(String email) throws Exception {
         ItemsDB itemsdb = new ItemsDB();
-        List<Items> items = itemsdb.getAll(email);
+        List<Item> Item = itemsdb.getAll(email);
+        return Item;
+    }
+    
+    public List<Item> getAll() throws Exception {
+        ItemsDB itemsdb = new ItemsDB();
+        List<Item> items = itemsdb.getAllItems();
         return items;
     }
     
-    public List<Items> getAll() throws Exception {
-        ItemsDB itemsdb = new ItemsDB();
-        List<Items> items = itemsdb.getAllItems();
-        return items;
-    }
-    
-    public List<Categories> getAllCats() throws Exception {
+    public List<Category> getAllCats() throws Exception {
         CategoriesDB cdb = new CategoriesDB();
-        List<Categories> categories = cdb.getAll();
-        return categories;
+        List<Category> Category = cdb.getAll();
+        return Category;
     }
     
     public void insertCat(String categoryName) {
         CategoriesDB cdb = new CategoriesDB();
-        Categories category = new Categories(0, categoryName);
+        Category category = new Category(0, categoryName);
         cdb.insert(category);
     }
     
     public void insert(int category, String itemName, double price, String owner) throws Exception {
-        Items items = new Items(0, itemName, price);
-        Categories categories = new Categories(category);
+        Item items = new Item(0, itemName, price);
+        Category categories = new Category(category);
         UserDB udb = new UserDB();
-        Users user = udb.get(owner);
+        User user = udb.get(owner);
         items.setOwner(user);
         items.setCategory(categories);
-        ItemsDB itemsdb = new ItemsDB();
-        itemsdb.insert(items);
+        ItemsDB itemdb = new ItemsDB();
+        itemdb.insert(items);
     }
     
     public void updateCat(String categoryName, int categoryID) throws Exception {
         CategoriesDB cdb = new CategoriesDB();
-        Categories category = cdb.get(categoryID);
+        Category category = cdb.get(categoryID);
         category.setCategoryName(categoryName);
         cdb.update(category);
     }
@@ -61,9 +60,9 @@ public class InventoryService {
     public void update(int itemid, int category, String itemname, double price, String owner) throws Exception {
         ItemsDB idb = new ItemsDB();
         UserDB udb = new UserDB();
-        Items item = idb.get(itemid);
-        Categories cat = new Categories(category);
-        Users user = udb.get(owner);
+        Item item = idb.get(itemid);
+        Category cat = new Category(category);
+        User user = udb.get(owner);
         item.setCategory(cat);
         item.setItemName(itemname);
         item.setOwner(user);
@@ -73,11 +72,7 @@ public class InventoryService {
     
     public void delete(int itemID) throws Exception {
         ItemsDB itemsdb = new ItemsDB();
-        Items item = itemsdb.get(itemID);
+        Item item = itemsdb.get(itemID);
         itemsdb.delete(item);
-    }
-
-    public void insert(String category, String name, double price, String email) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

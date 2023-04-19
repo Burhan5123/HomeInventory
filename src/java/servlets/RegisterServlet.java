@@ -1,3 +1,4 @@
+
 package servlets;
 
 import dataaccess.UserDB;
@@ -9,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import models.Role;
-import models.Users;
+import models.User;
 import services.AccountService;
 
 public class RegisterServlet extends HttpServlet {
@@ -17,6 +18,12 @@ public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+        AccountService as = new AccountService();
+
+        String uuid = request.getParameter("uuid");
+        String email = (String) session.getAttribute("email");
+        
             getServletContext().getRequestDispatcher("/WEB-INF/registration.jsp").forward(request, response);
             return;
         

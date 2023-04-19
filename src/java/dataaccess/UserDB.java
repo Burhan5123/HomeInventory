@@ -3,47 +3,47 @@ package dataaccess;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import models.Users;
+import models.User;
 /**
  *
  * @author Burhan
  */
 public class UserDB {
     
-    public List<Users> getAll() throws Exception {
+    public List<User> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            List<Users> user = em.createNamedQuery("Users.findAll", Users.class).getResultList();
+            List<User> user = em.createNamedQuery("User.findAll", User.class).getResultList();
             return user;
         } finally {
             em.close();
         }
     }
     
-    public Users get(String email) throws Exception {
+    public User get(String email) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Users user = em.find(Users.class, email);
+            User user = em.find(User.class, email);
             return user;
         } finally {
             em.close();
         }
     }
     
-    public Users getByUUID(String uuid) {
+    public User getByUUID(String uuid) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Users user = em.find(Users.class, uuid);
+            User user = em.find(User.class, uuid);
             return user;
         } finally {
             em.close();
         }
     }
     
-    public void insert(Users user) throws Exception {
+    public void insert(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -58,7 +58,7 @@ public class UserDB {
         }
     }
     
-    public void update(Users user) throws Exception {
+    public void update(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -73,7 +73,7 @@ public class UserDB {
         }
     }
     
-    public void delete(Users user) throws Exception {
+    public void delete(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         

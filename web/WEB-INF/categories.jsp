@@ -1,4 +1,3 @@
-
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,7 +10,6 @@
     <body>
         <h1>HOME nVentory</h1>
         <h2 name="title">Manage Categories</h2>
-      
                 <h2>Menu</h2>
                 <ul>
                     <li><a href="inventory?editProfile">Edit Profile</a></li>
@@ -28,24 +26,24 @@
                 </tr>
                 <c:forEach items="${categories}" var="categories">
                     <tr>
-                        <td>${categories.categoryID}</td>
+                        <td>${categories.getCategoryId() }</td>
                         <td>${categories.categoryName}</td>
                         <td>
                             <form method="get" action="admin?edit">
                                 <input type="submit" value="Edit">
                                 <input type="hidden" name="action" value="edit">
-                                <input type="hidden" name="catID" value="${categories.categoryID}">
+                                <input type="hidden" name="catID" value="${categories.getCategoryId()}">
                             </form>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
-            <c:if test="${editCat.categoryID != null}">
+            <c:if test="${editCat.getCategoryId()  != null}">
                 <form method="post" action="admin" name="formEdit">
                     <h2>Edit Category</h2>
                     <br>
                     <label>Category ID: </label>
-                    <input type="number" name="editCatID" value="${editCat.categoryID}" placeholder="Category ID" disabled="">
+                    <input type="number" name="editCatID" value="${editCat.getCategoryId() }" placeholder="Category ID" disabled="">
                     <br>
                     <label>Category Name: </label>
                     <input type="text" name="editCatName" value="${editCat.categoryName}" placeholder="Category Name">
@@ -56,7 +54,7 @@
                 </form>
             </c:if>
             <br>
-            <c:if test="${editCat.categoryID == null}">
+            <c:if test="${editCat.getCategoryId()  == null}">
                 <form method="get" action="admin?add" name="formAdd">
                     <h2>Add Category</h2>
                     <br>

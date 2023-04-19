@@ -5,20 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import models.Role;
-import models.Users;
+import models.User;
 
 public class AccountService {
     
-    public Users login(String email, String password, String path) {
+    public User login(String email, String password, String path) {
         UserDB userDB = new UserDB();
         
         try {
-            Users user = userDB.get(email);
-            if (password.equals(user.getPassword())) {               
+            User user = userDB.get(email);
+            if (password.equals(user.getPassword())) {
+                
                 HashMap<String, String> tags = new HashMap<>();
                 tags.put("firstname", user.getFirstName());
                 tags.put("lastname", user.getLastName());
                 tags.put("date", (new java.util.Date()).toString());
+                
                 
                 return user;
             }
@@ -33,7 +35,7 @@ public class AccountService {
         try {
             String uuid = UUID.randomUUID().toString();
             String link = url + "?uuid=" + uuid; 
-            Users user = userDB.get(email);
+            User user = userDB.get(email);
             user.setResetPasswordUuid(uuid);
             userDB.update(user);
 
@@ -51,7 +53,7 @@ public class AccountService {
         UserDB userdb = new UserDB();
         
         try {
-            Users user = userdb.get(email);
+            User user = userdb.get(email);
             String temp = user.getResetPasswordUuid();
             if (temp.equals(uuid)) {
                 user.setPassword(password);
@@ -68,7 +70,7 @@ public class AccountService {
     public void changeActive(String uuid, String email) {
         UserDB userdb = new UserDB();
         try {
-            Users user = userdb.get(email);
+            User user = userdb.get(email);
             String temp = user.getResetPasswordUuid();
             if (temp.equals(uuid)) {
                 user.setActive(true);
@@ -84,7 +86,7 @@ public class AccountService {
         try {
             String uuid = UUID.randomUUID().toString();
             String link = url + "?uuid=" + uuid; 
-            Users user = userDB.get(email);
+            User user = userDB.get(email);
             user.setResetPasswordUuid(uuid);
             userDB.update(user);
 
@@ -93,26 +95,25 @@ public class AccountService {
             tags.put("lastname", user.getLastName());
             tags.put("link", link);
 
-            
         } catch (Exception e) {
             System.out.println("ERROR");
         }
     }
     
-    public Users get(String email) throws Exception {
+    public User get(String email) throws Exception {
         UserDB userdb = new UserDB();
-        Users user = userdb.get(email);
+        User user = userdb.get(email);
         return user;
     }
     
-    public List<Users> getAll() throws Exception {
+    public List<User> getAll() throws Exception {
         UserDB userdb = new UserDB();
-        List<Users> users = userdb.getAll();
+        List<User> users = userdb.getAll();
         return users;
     }
     
     public void insert(String password, String email, String firstName, String lastName, boolean active, int roleid) throws Exception {
-        Users user = new Users(email, password, firstName, lastName, active);
+        User user = new User(email, password, firstName, lastName, active);
         Role role = new Role(roleid);
         user.setRole(role);
         UserDB userdb = new UserDB();
@@ -121,7 +122,7 @@ public class AccountService {
     
     public void update(String password, String email, String firstName, String lastName, boolean active, int roleid) throws Exception {
         UserDB userdb = new UserDB();
-        Users user = userdb.get(email);
+        User user = userdb.get(email);
         Role role = new Role(roleid);
         user.setPassword(password);
         user.setEmail(email);
@@ -134,7 +135,7 @@ public class AccountService {
     
     public void delete(String username) throws Exception {
         UserDB userdb = new UserDB();
-        Users user = userdb.get(username);
+        User user = userdb.get(username);
         userdb.delete(user);
     }
     

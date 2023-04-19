@@ -1,3 +1,4 @@
+
 package models;
 
 import java.io.Serializable;
@@ -7,8 +8,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -16,6 +15,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+
 /**
  *
  * @author Burhan
@@ -31,7 +31,6 @@ public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "role_id")
     private Integer roleId;
@@ -39,7 +38,7 @@ public class Role implements Serializable {
     @Column(name = "role_name")
     private String roleName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "role", fetch = FetchType.EAGER)
-    private List<Users> usersList;
+    private List<User> userList;
 
     public Role() {
     }
@@ -70,12 +69,12 @@ public class Role implements Serializable {
     }
 
     @XmlTransient
-    public List<Users> getUsersList() {
-        return usersList;
+    public List<User> getUserList() {
+        return userList;
     }
 
-    public void setUsersList(List<Users> usersList) {
-        this.usersList = usersList;
+    public void setUserList(List<User> userList) {
+        this.userList = userList;
     }
 
     @Override
@@ -87,6 +86,7 @@ public class Role implements Serializable {
 
     @Override
     public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Role)) {
             return false;
         }

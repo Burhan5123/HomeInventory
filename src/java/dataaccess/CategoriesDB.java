@@ -3,39 +3,40 @@ package dataaccess;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import models.Categories;
-import models.Items;
-import models.Users;
+import models.Category;
+import models.Item;
+import models.User;
 
 /**
  *
  * @author Burhan
  */
+
 public class CategoriesDB {
     
-    public List<Categories> getAll() throws Exception {
+    public List<Category> getAll() throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            List<Categories> categories = em.createNamedQuery("Categories.findAll", Categories.class).getResultList();
+            List<Category> categories = em.createNamedQuery("Category.findAll", Category.class).getResultList();
             return categories;
         } finally {
             em.close();
         }
     }
     
-    public Categories get(int categoryID) {
+    public Category get(int categoryID) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         
         try {
-            Categories category = em.find(Categories.class, categoryID);
+            Category category = em.find(Category.class, categoryID);
             return category;
         } finally { 
             em.close();
         }
     }
    
-    public void insert(Categories category) {
+    public void insert(Category category) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         
@@ -51,7 +52,7 @@ public class CategoriesDB {
         }
     }
     
-    public void update(Categories category) throws Exception {
+    public void update(Category category) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction trans = em.getTransaction();
         

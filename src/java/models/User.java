@@ -17,7 +17,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-
 /**
  *
  * @author Burhan
@@ -26,49 +25,54 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "user")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u")
-    , @NamedQuery(name = "Users.findByEmail", query = "SELECT u FROM Users u WHERE u.email = :email")
-    , @NamedQuery(name = "Users.findByPassword", query = "SELECT u FROM Users u WHERE u.password = :password")
-    , @NamedQuery(name = "Users.findByFirstName", query = "SELECT u FROM Users u WHERE u.firstName = :firstName")
-    , @NamedQuery(name = "Users.findByLastName", query = "SELECT u FROM Users u WHERE u.lastName = :lastName")
-    , @NamedQuery(name = "Users.findByActive", query = "SELECT u FROM Users u WHERE u.active = :active")
-    , @NamedQuery(name = "Users.findByResetPasswordUuid", query = "SELECT u FROM Users u WHERE u.resetPasswordUuid = :resetPasswordUuid")})
-public class Users implements Serializable {
+    @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+    , @NamedQuery(name = "User.findByEmail", query = "SELECT u FROM User u WHERE u.email = :email")
+    , @NamedQuery(name = "User.findByActive", query = "SELECT u FROM User u WHERE u.active = :active")
+    , @NamedQuery(name = "User.findByFirstName", query = "SELECT u FROM User u WHERE u.firstName = :firstName")
+    , @NamedQuery(name = "User.findByLastName", query = "SELECT u FROM User u WHERE u.lastName = :lastName")
+    , @NamedQuery(name = "User.findByPassword", query = "SELECT u FROM User u WHERE u.password = :password")})
+public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
     @Basic(optional = false)
-    @Column(name = "Password")
-    private String password;
+    @Column(name = "active")
+    private boolean active;
     @Basic(optional = false)
-    @Column(name = "First_Name")
+    @Column(name = "first_name")
     private String firstName;
     @Basic(optional = false)
-    @Column(name = "Last_Name")
+    @Column(name = "last_name")
     private String lastName;
     @Basic(optional = false)
-    @Column(name = "Active")
-    private boolean active;
-    @Column(name = "reset_password_uuid")
-    private String resetPasswordUuid;
+    @Column(name = "password")
+    private String password;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "owner", fetch = FetchType.EAGER)
-    private List<Items> itemsList;
+    private List<Item> itemList;
     @JoinColumn(name = "role", referencedColumnName = "role_id")
     @ManyToOne(optional = false, fetch = FetchType.EAGER)
     private Role role;
 
-    public Users() {
+    public User() {
     }
 
-    public Users(String email) {
+    public User(String email) {
         this.email = email;
     }
 
-    public Users(String email, String password, String firstName, String lastName, boolean active) {
+    public User(String email, boolean active, String firstName, String lastName, String password) {
         this.email = email;
+        this.active = active;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+    }
+
+    public User(String email, String password, String firstName, String lastName, boolean active) {
+     this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -83,12 +87,12 @@ public class Users implements Serializable {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public boolean getActive() {
+        return active;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getFirstName() {
@@ -107,29 +111,21 @@ public class Users implements Serializable {
         this.lastName = lastName;
     }
 
-    public boolean getActive() {
-        return active;
+    public String getPassword() {
+        return password;
     }
 
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getResetPasswordUuid() {
-        return resetPasswordUuid;
-    }
-
-    public void setResetPasswordUuid(String resetPasswordUuid) {
-        this.resetPasswordUuid = resetPasswordUuid;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @XmlTransient
-    public List<Items> getItemsList() {
-        return itemsList;
+    public List<Item> getItemList() {
+        return itemList;
     }
 
-    public void setItemsList(List<Items> itemsList) {
-        this.itemsList = itemsList;
+    public void setItemList(List<Item> itemList) {
+        this.itemList = itemList;
     }
 
     public Role getRole() {
@@ -149,11 +145,11 @@ public class Users implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-       
-        if (!(object instanceof Users)) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof User)) {
             return false;
         }
-        Users other = (Users) object;
+        User other = (User) object;
         if ((this.email == null && other.email != null) || (this.email != null && !this.email.equals(other.email))) {
             return false;
         }
@@ -162,7 +158,15 @@ public class Users implements Serializable {
 
     @Override
     public String toString() {
-        return "models.Users[ email=" + email + " ]";
+        return "models.User[ email=" + email + " ]";
+    }
+
+    public void setResetPasswordUuid(String uuid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public String getResetPasswordUuid() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
