@@ -71,7 +71,7 @@ public class AdminServlet extends HttpServlet {
             Logger.getLogger(InventoryServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/administration.jsp").forward(request,response);
         return;
     }
 
@@ -163,7 +163,7 @@ public class AdminServlet extends HttpServlet {
             request.setAttribute("message", "An error has occurred.");
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/admin.jsp").forward(request,response);
+        getServletContext().getRequestDispatcher("/WEB-INF/administration.jsp").forward(request,response);
         return;
     }
 }

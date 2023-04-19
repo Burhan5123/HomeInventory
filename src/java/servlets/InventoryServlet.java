@@ -45,7 +45,7 @@ public class InventoryServlet extends HttpServlet {
                 
                 if (param != null && param.equals("editProfile")) {
                     request.setAttribute("editProfile", user);
-                    getServletContext().getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request,response);
+                    getServletContext().getRequestDispatcher("/WEB-INF/profileedit.jsp").forward(request,response);
                     return;
                 }
                 
@@ -64,7 +64,7 @@ public class InventoryServlet extends HttpServlet {
         if (param != null && param.equals("editProfile")) {
             currentUser = (Users) session.getAttribute("loggedIn");
             request.setAttribute("editProfile", currentUser);
-            getServletContext().getRequestDispatcher("/WEB-INF/editProfile.jsp").forward(request,response);
+            getServletContext().getRequestDispatcher("/WEB-INF/profileedit.jsp").forward(request,response);
             return;
         }
         
@@ -114,11 +114,6 @@ public class InventoryServlet extends HttpServlet {
         try {
             int itemid = 0;
             switch (action) {
-                case "search":
-                    String search = request.getParameter("searchItem");
-                    
-                    request.setAttribute("searchItem", search);
-                    break;
                 case "saveProfile":
                     String password = user.getPassword();
                     if (request.getParameter("passwordEdit") != null) {

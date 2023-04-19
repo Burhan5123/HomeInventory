@@ -1,10 +1,8 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>HOME nVentory</title>
@@ -12,8 +10,6 @@
     <body>
         <h1>HOME nVentory</h1>
         <h2 name="title">Manage Users</h2>
-        <div name="left">
-            <div name="menu">
                 <h2>Menu</h2>
                 <ul>
                     <li><a href="inventory?editProfile">Edit Profile</a></li>
@@ -22,9 +18,6 @@
                     <li><a href="admin">Admin</a></li>
                     <li><a href="login?logout">Logout</a></li>
                 </ul>
-            </div>
-        </div>   
-        <div name="center">
         <table>
             <tr>
                 <th>Email</th>
@@ -56,10 +49,7 @@
             </c:forEach>
         </table>
         <p>${message}</p>
-        </div>
-        <div name="right">
             <c:if test="${editUser.email != null}">
-                <div name="edit">
                     <form method="post" action="admin" name="formEdit">
                         <h2>Edit User</h2>
                         <br>
@@ -93,12 +83,9 @@
                         <input type="hidden" name="action" value="save">
                         <a href="admin"><input type="button" value="Cancel"></a>
                     </form>
-                </div>
             </c:if>
-
             <br>
             <c:if test="${editUser.email == null}">
-                <div name="add">
                     <form method="post" action="admin" name="formAdd" required>
                         <h2>Add User</h2>
                         <br>
@@ -123,8 +110,6 @@
                         <input type="submit" name="addUser" value="Save">
                         <input type="hidden" name="action" value="add">
                     </form>
-                </div>
             </c:if>
-        </div>
     </body>
 </html>

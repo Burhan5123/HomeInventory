@@ -1,9 +1,7 @@
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,8 +12,7 @@
             <h1>HOME nVentory</h1>
             <h2 name="title">Edit Profile</h2>
         </header>
-        <div name="left">
-            <div name="menu">
+ 
                 <h2>Menu</h2>
                 <ul>
                     <li><a href="inventory?editProfile">Edit Profile</a></li>
@@ -26,9 +23,6 @@
                     </c:if>
                     <li><a href="login?logout">Logout</a></li>
                 </ul>
-            </div>
-        </div>  
-        <div name="center">
             <form method="post" action="inventory">
                 <label>Email: </label>
                 <input type="email" name="emailEdit" placeholder="Email" value="${editProfile.email}">
@@ -57,7 +51,5 @@
                 <input type="hidden" name="action" value="saveProfile">
                 <a href="inventory"><input type="button" value="Cancel"></a>
             </form>
-        </div>
-        <div name="right"></div>
     </body>
 </html>

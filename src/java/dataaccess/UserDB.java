@@ -4,7 +4,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import models.Users;
-
+/**
+ *
+ * @author Burhan
+ */
 public class UserDB {
     
     public List<Users> getAll() throws Exception {

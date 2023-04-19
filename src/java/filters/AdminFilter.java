@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package filters;
 
 import dataaccess.UserDB;
@@ -27,15 +22,12 @@ import models.Users;
 
 /**
  *
- * @author RhodanPC
+ * @author Burha
  */
 public class AdminFilter implements Filter {
     
     private static final boolean debug = true;
 
-    // The filter configuration object we are associated with.  If
-    // this value is null, this filter instance is not currently
-    // configured. 
     private FilterConfig filterConfig = null;
     
     public AdminFilter() {

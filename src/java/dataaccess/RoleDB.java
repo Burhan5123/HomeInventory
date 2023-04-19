@@ -4,7 +4,10 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import models.Role;
-
+/**
+ *
+ * @author Burhan
+ */
 public class RoleDB {
     
     public List<Role> getAll() throws Exception {

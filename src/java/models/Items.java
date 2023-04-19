@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author RhodanPC
+ * @author Burhan
  */
 @Entity
 @Table(name = "item")
@@ -41,7 +41,7 @@ public class Items implements Serializable {
     @Column(name = "Item_ID")
     private Integer itemID;
     @Basic(optional = false)
-    @Column(name = "item_name")
+    @Column(name = "Item_Name")
     private String itemName;
     @Basic(optional = false)
     @Column(name = "Price")
@@ -115,7 +115,6 @@ public class Items implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Items)) {
             return false;
         }

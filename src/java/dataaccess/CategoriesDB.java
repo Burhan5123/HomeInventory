@@ -7,6 +7,10 @@ import models.Categories;
 import models.Items;
 import models.Users;
 
+/**
+ *
+ * @author Burhan
+ */
 public class CategoriesDB {
     
     public List<Categories> getAll() throws Exception {

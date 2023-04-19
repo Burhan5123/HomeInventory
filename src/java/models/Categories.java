@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package models;
 
 import java.io.Serializable;
@@ -24,7 +20,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author RhodanPC
+ * @author Burhan
  */
 @Entity
 @Table(name = "category")
@@ -39,10 +35,10 @@ public class Categories implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "category_id")
+    @Column(name = "Category_ID")
     private Integer categoryID;
     @Basic(optional = false)
-    @Column(name = "Category_name")
+    @Column(name = "Category_Name")
     private String categoryName;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
     private List<Items> itemsList;
@@ -93,7 +89,6 @@ public class Categories implements Serializable {
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Categories)) {
             return false;
         }
