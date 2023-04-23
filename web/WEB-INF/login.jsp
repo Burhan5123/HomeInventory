@@ -5,10 +5,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOME nVentory</title>
+        <title>Home Inventory</title>
     </head>
     <body>
         <h1>HOME nVentory</h1>
+        <h2>Login</h2>
         <form method="post" action="login">
             E-mail Address: <input type="email" name="email" required>
             <br>

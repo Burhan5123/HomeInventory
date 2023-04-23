@@ -22,7 +22,7 @@
     </filter-mapping>
     <servlet>
         <servlet-name>AdminServlet</servlet-name>
-        <servlet-class>servlets.AdminServlet</servlet-class>
+        <servlet-class>servlets.AdminsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InventoryServlet</servlet-name>
@@ -30,7 +30,7 @@
     </servlet>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>servlets.RegisterServlet</servlet-class>
+        <servlet-class>servlets.RegisterationServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>

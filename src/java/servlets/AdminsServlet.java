@@ -19,7 +19,7 @@ import models.User;
 import services.AccountService;
 import services.InventoryService;
 
-public class AdminServlet extends HttpServlet {
+public class AdminsServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

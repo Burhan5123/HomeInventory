@@ -5,19 +5,19 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOME nVentory</title>
+        <title>Home Inventory</title>
     </head>
     <body>
         <h1>HOME nVentory</h1>
-        <h2 name="title">Registration</h2>
+        <h2>Registration</h2>
         <form method="post" action="register">   
-            <input type="email" name="registerEmail" placeholder="Email" value="" required>
+            Registration: <input type="email" name="registerEmail" placeholder="Email" value="" required>
             <br>
-            <input type="password" name="registerPassword" placeholder="Password" value="" required>
+            Password: <input type="password" name="registerPassword" placeholder="Password" value="" required>
             <br>
-            <input type="text" name="registerFirstName" placeholder="First Name" value="" required>
+            First Name: <input type="text" name="registerFirstName" placeholder="First Name" value="" required>
             <br>
-            <input type="text" name="registerLastName" placeholder="Last Name" value="" required>
+            Last Name: <input type="text" name="registerLastName" placeholder="Last Name" value="" required>
             <br>
             <input type="submit" value="Register">
             <input type="hidden" name="action" value="Submit">

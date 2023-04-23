@@ -13,7 +13,7 @@ import models.Role;
 import models.User;
 import services.AccountService;
 
-public class RegisterServlet extends HttpServlet {
+public class RegisterationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

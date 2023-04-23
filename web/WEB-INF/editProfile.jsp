@@ -5,12 +5,12 @@
     
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOME nVentory</title>
+        <title>Home Inventory</title>
     </head>
     <body>
         <header>
             <h1>HOME nVentory</h1>
-            <h2 name="title">Edit Profile</h2>
+            <h2>Edit Profile</h2>
         </header>
                 <h2>Menu</h2>
                 <ul>

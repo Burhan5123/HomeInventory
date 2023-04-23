@@ -5,11 +5,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOME nVentory</title>
+        <title>Home Inventory</title>
     </head>
     <body>
         <h1>HOME nVentory</h1>
-        <h2 name="title">Manage Categories</h2>
+        <h2>Your Categories</h2>
                 <h2>Menu</h2>
                 <ul>
                     <li><a href="inventory?editProfile">Edit Profile</a></li>

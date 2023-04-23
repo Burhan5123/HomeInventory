@@ -5,12 +5,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOME nVentory</title>
+        <title>Home Inventory</title>
     </head>
     <body>
         <header>
             <h1>HOME nVentory</h1>
-            <h2 name="title">Inventory for ${user.firstName} ${user.lastName}</h2>
+            <h2>Inventory for ${user.firstName} ${user.lastName}</h2>
         </header>
                 <h2>Menu</h2>
                 <ul>
@@ -56,14 +56,14 @@
                     </c:forEach>
                 </table>
             <p>${message}</p>
-            <c:if test="${editItem.itemID != null}">
+            <c:if test="${editItem.getItemId() != null}">
                 <form method="post" action="inventory" name="formEdit">
                     <h2>Edit Item</h2>
                     <br>
                     <label>Category: </label>
                     <select name="categoryEdit" value="">
                         <c:forEach items="${categories}" var="categories">
-                            <option value="${categories.categoryID}">${categories.categoryName}</options>
+                            <option value="${categories.getCategoryId()}">${categories.categoryName}</options>
                         </c:forEach>
                     </select>
                     <br>

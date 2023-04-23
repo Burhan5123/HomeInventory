@@ -5,12 +5,12 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>HOME nVentory</title>
+        <title>Home Inventory</title>
     </head>
     <body>
-        <h1>HOME nVentory</h1>
-        <h2 name="title">Manage Users</h2>
-                <h2>Menu</h2>
+        <h1>Admin</h1>
+        <h2>Administrative Mode</h2>
+                <h2>USERS</h2>
                 <ul>
                     <li><a href="inventory?editProfile">Edit Profile</a></li>
                     <li><a href="inventory?admin">Inventory</a></li>
@@ -88,15 +88,15 @@
             <br>
             <c:if test="${editUser.email == null}">
                     <form method="post" action="admin" name="formAdd" required>
-                        <h2>Add User</h2>
+                        <h2>ADD USER</h2>
                         <br>
-                        <input type="text" name="emailAdd" placeholder="Email" required>
+                        Email: <input type="text" name="emailAdd" required>
                         <br>
-                        <input type="password" name="passwordAdd" placeholder="Password" required>
+                        Password: <input type="password" name="passwordAdd" required>
                         <br>
-                        <input type="text" name="firstnameAdd" placeholder="First Name" required>
+                        First Name: <input type="text" name="firstnameAdd" required>
                         <br>
-                        <input type="text" name="lastnameAdd" placeholder="Last Name" required>
+                        Last Name: <input type="text" name="lastnameAdd" required>
                         <br>
                         <input type="radio" id="active" name="activeStatus" value="active"><label for="active">Active</label>
                         <input type="radio" id="inactive" name="activeStatus" value="inactive" checked="checked"><label for="inactive" >Inactive</label>
