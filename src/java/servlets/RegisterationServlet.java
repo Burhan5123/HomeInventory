@@ -47,9 +47,11 @@ public class RegisterationServlet extends HttpServlet {
                     String first = request.getParameter("registerFirstName");
                     String last = request.getParameter("registerLastName");
 
-                    as.insert(password, email, first, last, false, 2);
+                    as.insert(password, email, first, last, true, 2);
                     as.register(email, path, url);
+                    request.setAttribute("message", "User successfully registered.");
                     break;
+                    
                 default:
                     break;
             }
